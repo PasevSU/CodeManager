@@ -1,0 +1,20 @@
+{
+  "extension.description": "高效管理你的代码",
+  "view.title": "代码管理",
+  "command.runCode": "运行代码",
+  "command.selectDirectory": "设置目录",
+  "command.refreshTreeView": "刷新",
+  "command.showCurrentFolder": "显示当前工作区文件夹",
+  "command.openFile": "打开文件",
+  "command.newFile": "新建文件...",
+  "command.newFolder": "新建目录...",
+  "command.renameFile": "重命名...",
+  "command.deleteFiles": "删除",
+  "command.revealInExplorer": "在资源管理器显示",
+  "command.openTerminalAtFile": "在集成终端中打开",
+  "command.openInNewWindow": "在新窗口打开目录",
+  "command.copyPath": "复制路径",
+  "viewWelcome.contents": "还没有设置根目录 [了解更多](https://github.com/PasevSU/CodeManager).\n[选择文件夹](command:wf-code-manager.selectDirectory)",
+  "configuration.title": "运行代码配置",
+  "configuration.rootPath.description": "根目录"
+}

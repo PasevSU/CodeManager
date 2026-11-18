@@ -1,0 +1,519 @@
+{
+  "name": "wf-code-manager",
+  "displayName": "Code Manager",
+  "description": "%extension.description%",
+  "publisher": "wf-soft",
+  "icon": "images/logo.png",
+  "version": "1.2.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PasevSU/CodeManager"
+  },
+  "homepage": "https://github.com/PasevSU/CodeManager#readme",
+  "bugs": {
+    "url": "https://github.com/PasevSU/CodeManager/issues"
+  },
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "code",
+    "codemanager",
+    "code manager",
+    "file",
+    "files",
+    "manager",
+    "explorer",
+    "folder",
+    "script",
+    "scripts",
+    "workspace",
+    "projects",
+    "tree",
+    "view",
+    "solution"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onView:wf-code-manager"
+  ],
+  "main": "./dist/extension.js",
+  "l10n": "./l10n",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "wf-code-manager",
+          "title": "%view.title%",
+          "icon": "images/dark/logo.svg"
+        }
+      ]
+    },
+    "views": {
+      "wf-code-manager": [
+        {
+          "id": "wf-code-manager",
+          "name": "%view.title%",
+          "icon": "images/dark/logo.svg"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "wf-code-manager",
+        "contents": "%viewWelcome.contents%"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "wf-code-manager.runFolder",
+          "when": "view == wf-code-manager",
+          "group": "navigation@1"
+        },
+        {
+          "command": "wf-code-manager.dryRun",
+          "when": "view == wf-code-manager",
+          "group": "navigation@2"
+        },
+        {
+          "command": "wf-code-manager.stopRun",
+          "when": "view == wf-code-manager",
+          "group": "navigation@3"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "wf-code-manager.openFile",
+          "when": "view == wf-code-manager && viewItem =~ /file/",
+          "group": "0_run@1"
+        },
+        {
+          "command": "wf-code-manager.runInTerminal",
+          "when": "view == wf-code-manager && viewItem =~ /file/",
+          "group": "0_run@2"
+        },
+        {
+          "command": "wf-code-manager.cli",
+          "when": "view == wf-code-manager && viewItem == file-cli",
+          "group": "0_run@3"
+        },
+        {
+          "command": "wf-code-manager.runCode",
+          "when": "view == wf-code-manager && viewItem =~ /file/",
+          "group": "0_run@4"
+        },
+        {
+          "command": "wf-code-manager.runFolder",
+          "when": "view == wf-code-manager && viewItem =~ /folder/",
+          "group": "0_run@5"
+        },
+        {
+          "command": "wf-code-manager.dryRun",
+          "when": "view == wf-code-manager && viewItem =~ /folder/",
+          "group": "0_run@6"
+        },
+        {
+          "command": "wf-code-manager.resumeRun",
+          "when": "view == wf-code-manager && viewItem =~ /folder/",
+          "group": "0_run@7"
+        },
+        {
+          "command": "wf-code-manager.watchFolder",
+          "when": "view == wf-code-manager && viewItem =~ /folder/",
+          "group": "0_run@8"
+        },
+        {
+          "command": "wf-code-manager.runCode",
+          "when": "view == wf-code-manager && viewItem =~ /file/",
+          "group": "inline"
+        },
+        {
+          "command": "wf-code-manager.infoFile",
+          "when": "view == wf-code-manager && viewItem =~ /file/",
+          "group": "1_type@1"
+        },
+        {
+          "command": "wf-code-manager.textImport",
+          "when": "view == wf-code-manager && viewItem =~ /file/",
+          "group": "1_type@2"
+        },
+        {
+          "command": "wf-code-manager.renameFile",
+          "when": "view == wf-code-manager && viewItem =~ /file|folder/",
+          "group": "2_edit@1"
+        },
+        {
+          "command": "wf-code-manager.duplicateFile",
+          "when": "view == wf-code-manager && viewItem =~ /file/",
+          "group": "2_edit@2"
+        },
+        {
+          "command": "wf-code-manager.copyContent",
+          "when": "view == wf-code-manager && viewItem =~ /file/",
+          "group": "2_edit@3"
+        },
+        {
+          "command": "wf-code-manager.copyPath",
+          "when": "view == wf-code-manager && viewItem =~ /file|folder/",
+          "group": "2_edit@4"
+        },
+        {
+          "command": "wf-code-manager.deleteFiles",
+          "when": "view == wf-code-manager && viewItem =~ /file|folder/",
+          "group": "2_edit@5"
+        },
+        {
+          "command": "wf-code-manager.newFile",
+          "when": "view == wf-code-manager && viewItem =~ /file|folder/",
+          "group": "3_new@1"
+        },
+        {
+          "command": "wf-code-manager.newFolder",
+          "when": "view == wf-code-manager && viewItem =~ /file|folder/",
+          "group": "3_new@2"
+        },
+        {
+          "command": "wf-code-manager.revealInExplorer",
+          "when": "view == wf-code-manager",
+          "group": "4_go@1"
+        },
+        {
+          "command": "wf-code-manager.openTerminalAtFile",
+          "when": "view == wf-code-manager && viewItem =~ /file|folder/",
+          "group": "4_go@2"
+        },
+        {
+          "command": "wf-code-manager.openInNewWindow",
+          "when": "view == wf-code-manager && viewItem =~ /folder/",
+          "group": "4_go@3"
+        },
+        {
+          "command": "wf-code-manager.openStructure",
+          "when": "view == wf-code-manager && viewItem =~ /folder/",
+          "group": "4_go@4"
+        },
+        {
+          "command": "wf-code-manager.searchScripts",
+          "when": "view == wf-code-manager",
+          "group": "5_more@1"
+        },
+        {
+          "command": "wf-code-manager.buildIndex",
+          "when": "view == wf-code-manager",
+          "group": "5_more@2"
+        },
+        {
+          "command": "wf-code-manager.showLastReport",
+          "when": "view == wf-code-manager",
+          "group": "5_more@3"
+        },
+        {
+          "command": "wf-code-manager.rerunFailed",
+          "when": "view == wf-code-manager",
+          "group": "5_more@4"
+        },
+        {
+          "command": "wf-code-manager.openReportsFolder",
+          "when": "view == wf-code-manager",
+          "group": "5_more@5"
+        },
+        {
+          "command": "wf-code-manager.more",
+          "when": "view == wf-code-manager",
+          "group": "5_more@6"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "wf-code-manager.runCode",
+        "title": "%command.runCode%",
+        "icon": "$(play)"
+      },
+      {
+        "command": "wf-code-manager.selectDirectory",
+        "title": "%command.selectDirectory%",
+        "icon": "$(gear)"
+      },
+      {
+        "command": "wf-code-manager.refreshTreeView",
+        "title": "%command.refreshTreeView%",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "wf-code-manager.showCurrentFolder",
+        "title": "%command.showCurrentFolder%",
+        "icon": "$(folder-opened)"
+      },
+      {
+        "command": "wf-code-manager.openFile",
+        "title": "%command.openFile%"
+      },
+      {
+        "command": "wf-code-manager.newFile",
+        "title": "%command.newFile%",
+        "icon": "$(new-file)"
+      },
+      {
+        "command": "wf-code-manager.newFolder",
+        "title": "%command.newFolder%",
+        "icon": "$(new-folder)"
+      },
+      {
+        "command": "wf-code-manager.renameFile",
+        "title": "%command.renameFile%"
+      },
+      {
+        "command": "wf-code-manager.deleteFiles",
+        "title": "%command.deleteFiles%"
+      },
+      {
+        "command": "wf-code-manager.revealInExplorer",
+        "title": "%command.revealInExplorer%"
+      },
+      {
+        "command": "wf-code-manager.openTerminalAtFile",
+        "title": "%command.openTerminalAtFile%"
+      },
+      {
+        "command": "wf-code-manager.openInNewWindow",
+        "title": "%command.openInNewWindow%"
+      },
+      {
+        "command": "wf-code-manager.copyPath",
+        "title": "%command.copyPath%"
+      },
+      {
+        "command": "wf-code-manager.runInTerminal",
+        "title": "Run in Terminal (single script)"
+      },
+      {
+        "command": "wf-code-manager.newCommand",
+        "title": "New Command (legacy — use New File…)"
+      },
+      {
+        "command": "wf-code-manager.copyContent",
+        "title": "Copy Content"
+      },
+      {
+        "command": "wf-code-manager.duplicateFile",
+        "title": "Duplicate"
+      },
+      {
+        "command": "wf-code-manager.infoFile",
+        "title": "Mark as Info (--info)"
+      },
+      {
+        "command": "wf-code-manager.textImport",
+        "title": "Insert Text Content (--text)"
+      },
+      {
+        "command": "wf-code-manager.cli",
+        "title": "Run CLI Menu (--cli)"
+      },
+      {
+        "command": "wf-code-manager.runAll",
+        "title": "Run All (legacy — use Run Folder)"
+      },
+      {
+        "command": "wf-code-manager.newRecursiveFolder",
+        "title": "New Recursive Folder (legacy — use New Folder…)"
+      },
+      {
+        "command": "wf-code-manager.openStructure",
+        "title": "Open as Structure"
+      },
+      {
+        "command": "wf-code-manager.runFolder",
+        "title": "Run Folder (recursive sequence)",
+        "icon": "$(play)"
+      },
+      {
+        "command": "wf-code-manager.dryRun",
+        "title": "Preview Plan (dry run)",
+        "icon": "$(preview)"
+      },
+      {
+        "command": "wf-code-manager.rerunFailed",
+        "title": "Rerun Failed Scripts",
+        "icon": "$(debug-rerun)"
+      },
+      {
+        "command": "wf-code-manager.stopRun",
+        "title": "Stop Current Run",
+        "icon": "$(debug-stop)"
+      },
+      {
+        "command": "wf-code-manager.showLastReport",
+        "title": "Show Last Run Report",
+        "icon": "$(report)"
+      },
+      {
+        "command": "wf-code-manager.showRunStatus",
+        "title": "Show Runner Status",
+        "icon": "$(pulse)"
+      },
+      {
+        "command": "wf-code-manager.more",
+        "title": "More… (all Code Manager commands)",
+        "icon": "$(ellipsis)"
+      },
+      {
+        "command": "wf-code-manager.buildIndex",
+        "title": "Build Script Index",
+        "icon": "$(list-tree)"
+      },
+      {
+        "command": "wf-code-manager.searchScripts",
+        "title": "Search Scripts",
+        "icon": "$(search)"
+      },
+      {
+        "command": "wf-code-manager.openReportsFolder",
+        "title": "Open Reports Folder",
+        "icon": "$(folder-opened)"
+      },
+      {
+        "command": "wf-code-manager.resumeRun",
+        "title": "Resume Interrupted Run",
+        "icon": "$(debug-continue)"
+      },
+      {
+        "command": "wf-code-manager.watchFolder",
+        "title": "Watch Folder (auto re-run)",
+        "icon": "$(eye)"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "%configuration.title%",
+      "properties": {
+        "wf-code-manager.rootPath": {
+          "type": "string",
+          "default": "",
+          "description": "%configuration.rootPath.description%",
+          "scope": "resource"
+        },
+        "wf-code-manager.runner.stopOnError": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enterprise runner: stop the run on the first failing script."
+        },
+        "wf-code-manager.runner.timeoutSeconds": {
+          "type": "number",
+          "default": 0,
+          "minimum": 0,
+          "description": "Enterprise runner: kill a script after N seconds (0 = no timeout)."
+        },
+        "wf-code-manager.runner.retries": {
+          "type": "number",
+          "default": 0,
+          "minimum": 0,
+          "description": "Enterprise runner: number of retries for a failing script."
+        },
+        "wf-code-manager.runner.maxParallel": {
+          "type": "number",
+          "default": 4,
+          "minimum": 1,
+          "description": "Enterprise runner: max concurrent scripts for '--par' batches."
+        },
+        "wf-code-manager.runner.numberedOnly": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enterprise runner: only run scripts with a numeric order prefix (01, 02, ...)."
+        },
+        "wf-code-manager.runner.recursive": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enterprise runner: descend into subfolders."
+        },
+        "wf-code-manager.runner.confirmBeforeRun": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enterprise runner: ask for confirmation (with a plan preview) before executing."
+        },
+        "wf-code-manager.runner.ignoreFolders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "Extra folder names to ignore (added to the built-in safe list)."
+        },
+        "wf-code-manager.runner.includeExtensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "Only run these extensions (empty = all supported)."
+        },
+        "wf-code-manager.runner.reportsDir": {
+          "type": "string",
+          "default": "",
+          "description": "Where to write run reports (default: <root>/.codemanager/reports)."
+        },
+        "wf-code-manager.runner.pwshPath": {
+          "type": "string",
+          "default": "",
+          "description": "Explicit pwsh.exe path (auto-detected when empty)."
+        },
+        "wf-code-manager.runner.pythonPath": {
+          "type": "string",
+          "default": "",
+          "description": "Explicit python path (auto-detected when empty)."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "lint": "eslint src",
+    "test": "npm run test:unit && npm run test:bundle",
+    "test:unit": "node test/runner.test.js",
+    "test:bundle": "node test/bundle.test.js",
+    "test:stability": "node test/all.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@types/vscode": "1.56.0",
+    "@typescript-eslint/eslint-plugin": "^8.25.0",
+    "@typescript-eslint/parser": "^8.25.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
+    "eslint": "^9.21.0",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.7.3",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1"
+  },
+  "localizations": [
+    {
+      "languageId": "zh-cn",
+      "languageName": "Chinese (Simplified)",
+      "localizedLanguageName": "简体中文",
+      "translations": [
+        {
+          "id": "package",
+          "path": "./package.nls.zh-cn.json"
+        }
+      ]
+    }
+  ],
+  "__metadata": {
+    "installedTimestamp": 1786067329095,
+    "targetPlatform": "undefined",
+    "size": 336369
+  }
+}

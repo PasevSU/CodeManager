@@ -1,0 +1,20 @@
+# dependencies / build output
+node_modules/
+.npm/
+
+# packaged extension
+*.vsix
+
+# backups of the bundles (kept locally, never published)
+*.bak
+*.bak2*
+*.bak3*
+*.bak-*
+*.bak4*
+
+# editor / OS noise
+.vscode-test/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
